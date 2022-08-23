@@ -22,7 +22,7 @@ resource "azurerm_firewall" "firewall" {
   name                = "firewall"
   location            = local.fw-location
   resource_group_name = azurerm_resource_group.connectivity-rg.name
-  sku_name            = "AZFW_Hub"
+  sku_name            = "AZFW_VNet"
   sku_tier            = "Premium"
   firewall_policy_id  = azurerm_firewall_policy.firewall-policy.id
 
