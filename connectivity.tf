@@ -100,8 +100,8 @@ resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
   type     = "Vpn"
   vpn_type = "RouteBased"
 
-  sku                        = var.gw_sku
-  generation                 = "Generation1"
+  sku        = var.gw_sku
+  generation = "Generation1"
 
   ip_configuration {
     name                          = "vnetGatewayConfig"
@@ -118,9 +118,9 @@ resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
 }
 
 # Gateway Connection to on-premise network
-resource "azurerm_virtual_network_gateway_connection" "onpremise" {
+resource "azurerm_virtual_network_gateway_connection" "onpremise-gateway-connection" {
   provider            = azurerm.connectivity-sub
-  name                = "onpremise"
+  name                = "office"
   location            = local.connect-location
   resource_group_name = local.connect-rgname
 
@@ -129,4 +129,8 @@ resource "azurerm_virtual_network_gateway_connection" "onpremise" {
   local_network_gateway_id   = azurerm_local_network_gateway.onpremise-gateway.id
 
   shared_key = local.ipsec-key
+
+  tags = {
+    environment = local.connect-tag
+  }
 }
