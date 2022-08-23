@@ -18,7 +18,7 @@ resource "azurerm_network_security_group" "corp-nsg" {
   }
 
   tags = {
-    environment = "On-Premise"
+    environment = "Corp"
   }
 }
 
