@@ -106,7 +106,7 @@ resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
   ip_configuration {
     name                          = "vnetGatewayConfig"
     public_ip_address_id          = azurerm_public_ip.gateway-pip.id
-    private_ip_address_allocation = "Static"
+    private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.hub-gateway-subnet.id
   }
 
