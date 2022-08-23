@@ -1,7 +1,7 @@
-# Allowing RDP access to the company on-premise server
+# Corp Landing Zone NSG
 resource "azurerm_network_security_group" "corp-nsg" {
   provider            = azurerm.corp-sub
-  name                = "Corp-Network-NSG"
+  name                = "corp-lz-nsg"
   location            = azurerm_resource_group.corp-rg.location
   resource_group_name = azurerm_resource_group.corp-rg.name
 
@@ -27,4 +27,17 @@ resource "azurerm_subnet_network_security_group_association" "corp-default-subne
   provider                  = azurerm.corp-sub
   subnet_id                 = azurerm_subnet.default-corp-subnet.id
   network_security_group_id = azurerm_network_security_group.corp-nsg.id
+}
+
+
+# Online Landing Zone NSG
+resource "azurerm_network_security_group" "online-network-secgrp" {
+  provider            = azurerm.online-sub
+  name                = "onlineNetworkSecurityGroup"
+  location            = azurerm_resource_group.online-network-rg.location
+  resource_group_name = azurerm_resource_group.online-network-rg.name
+
+  tags = {
+    environment = "Online"
+  }
 }
