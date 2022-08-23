@@ -1,7 +1,7 @@
 locals {
   location    = "uksouth"
-  corp-tag    = "On-Premise-Based-Application"
-  corp-rgname = "on-premise-based-solution-rg"
+  corp-tag    = "Corp"
+  corp-rgname = "on-premise-application-rg"
 }
 
 resource "azurerm_resource_group" "corp-rg" {
@@ -20,7 +20,7 @@ resource "azurerm_virtual_network" "corp-vnet" {
   name                = "corp-network"
   location            = local.location
   resource_group_name = local.corp-rgname
-  address_space       = ["192.168.0.0/16"]
+  address_space       = ["10.1.0.0/24"]
 
   tags = {
     environment = local.corp-tag
@@ -32,5 +32,5 @@ resource "azurerm_subnet" "default-corp-subnet" {
   name                 = "default"
   resource_group_name  = local.corp-rgname
   virtual_network_name = azurerm_virtual_network.corp-vnet.name
-  address_prefixes     = ["192.168.1.128/25"]
+  address_prefixes     = ["10.1.0.0/25"]
 }
