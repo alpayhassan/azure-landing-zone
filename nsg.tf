@@ -1,7 +1,7 @@
 # Corp Landing Zone NSG
 resource "azurerm_network_security_group" "corp-nsg" {
   provider            = azurerm.corp-sub
-  name                = "corp-lz-nsg"
+  name                = "corp-NetworkSecurityGroup"
   location            = azurerm_resource_group.corp-rg.location
   resource_group_name = azurerm_resource_group.corp-rg.name
 
@@ -23,7 +23,7 @@ resource "azurerm_network_security_group" "corp-nsg" {
 }
 
 # Associating NSG with Corp default subnet
-resource "azurerm_subnet_network_security_group_association" "corp-default-subnet-NSG" {
+resource "azurerm_subnet_network_security_group_association" "corp-default-subnet-nsg" {
   provider                  = azurerm.corp-sub
   subnet_id                 = azurerm_subnet.default-corp-subnet.id
   network_security_group_id = azurerm_network_security_group.corp-nsg.id
@@ -33,11 +33,24 @@ resource "azurerm_subnet_network_security_group_association" "corp-default-subne
 # Online Landing Zone NSG
 resource "azurerm_network_security_group" "online-network-secgrp" {
   provider            = azurerm.online-sub
-  name                = "onlineNetworkSecurityGroup"
+  name                = "online-NetworkSecurityGroup"
   location            = azurerm_resource_group.online-network-rg.location
   resource_group_name = azurerm_resource_group.online-network-rg.name
 
   tags = {
     environment = "Online"
   }
+}
+
+# Associating NSG with Online network subnets
+resource "azurerm_subnet_network_security_group_association" "online-frontend-subnet-nsg" {
+  provider                  = azurerm.online-sub
+  subnet_id                 = azurerm_subnet.frontend.id
+  network_security_group_id = azurerm_network_security_group.online-network-secgrp.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "online-backend-subnet-nsg" {
+  provider                  = azurerm.online-sub
+  subnet_id                 = azurerm_subnet.backend.id
+  network_security_group_id = azurerm_network_security_group.online-network-secgrp.id
 }
