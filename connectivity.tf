@@ -81,7 +81,7 @@ resource "azurerm_public_ip" "firewall-pip" {
 
 # Local Network Gateway
 resource "azurerm_local_network_gateway" "onpremise-gateway" {
-  provider = azurerm.connectivity-sub
+  provider            = azurerm.connectivity-sub
   name                = "onpremise"
   location            = local.connect-location
   resource_group_name = local.connect-rgname
@@ -92,7 +92,7 @@ resource "azurerm_local_network_gateway" "onpremise-gateway" {
 
 # Virtual Network Gateway
 resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
-  provider = azurerm.connectivity-sub
+  provider            = azurerm.connectivity-sub
   name                = "hub-gateway"
   location            = local.connect-location
   resource_group_name = local.connect-rgname
@@ -100,15 +100,16 @@ resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
   type     = "Vpn"
   vpn_type = "RouteBased"
 
-  sku        = var.gw_sku
-  generation = "Generation1"
+  sku                        = var.gw_sku
+  generation                 = "Generation1"
 
   ip_configuration {
     name                          = "vnetGatewayConfig"
     public_ip_address_id          = azurerm_public_ip.gateway-pip.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
     subnet_id                     = azurerm_subnet.hub-gateway-subnet.id
   }
+
   depends_on = [azurerm_public_ip.gateway-pip]
 
   tags = {
@@ -118,7 +119,7 @@ resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
 
 # Gateway Connection to on-premise network
 resource "azurerm_virtual_network_gateway_connection" "onpremise" {
-  provider = azurerm.connectivity-sub
+  provider            = azurerm.connectivity-sub
   name                = "onpremise"
   location            = local.connect-location
   resource_group_name = local.connect-rgname
