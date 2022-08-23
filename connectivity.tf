@@ -50,7 +50,7 @@ resource "azurerm_subnet" "hub-gateway-subnet" {
   name                 = "GatewaySubnet"
   resource_group_name  = local.connect-rgname
   virtual_network_name = azurerm_virtual_network.connectivity-vnet.name
-  address_prefixes     = ["10.0.0.0/27"]
+  address_prefixes     = ["10.0.0.64/27"]
 }
 
 # Public IPs
