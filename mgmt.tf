@@ -2,7 +2,7 @@
 
 locals {
   mgmt-rgname = "management-resources"
-  mgmt-loc = "uksouth"
+  mgmt-loc    = "uksouth"
 }
 
 resource "azurerm_resource_group" "management-rg" {
@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "management-rg" {
 
 # Automation account
 resource "azurerm_automation_account" "autom-acc" {
-  provider = azurerm.mgmt-sub
+  provider            = azurerm.mgmt-sub
   name                = "account1"
   location            = local.mgmt-loc
   resource_group_name = local.mgmt-rgname
@@ -27,7 +27,7 @@ resource "azurerm_automation_account" "autom-acc" {
 
 # Log Analytics Workspace
 resource "azurerm_log_analytics_workspace" "company-log-analytics-ws" {
-  provider = azurerm.mgmt-sub
+  provider            = azurerm.mgmt-sub
   name                = "company-la"
   location            = local.mgmt-loc
   resource_group_name = local.mgmt-rgname
@@ -41,10 +41,10 @@ resource "azurerm_log_analytics_workspace" "company-log-analytics-ws" {
 
 # Log Analytics Solution
 resource "azurerm_log_analytics_solution" "company-log-analytics-sol" {
-  provider = azurerm.mgmt-sub
+  provider              = azurerm.mgmt-sub
   solution_name         = "SecurityInsights"
-  location            = local.mgmt-loc
-  resource_group_name = local.mgmt-rgname
+  location              = local.mgmt-loc
+  resource_group_name   = local.mgmt-rgname
   workspace_resource_id = azurerm_log_analytics_workspace.company-log-analytics-ws.id
   workspace_name        = azurerm_log_analytics_workspace.company-log-analytics-ws.name
 

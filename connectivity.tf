@@ -45,7 +45,7 @@ resource "azurerm_subnet" "firewall-subnet" {
 }
 
 resource "azurerm_subnet" "hub-gateway-subnet" {
-  provider            = azurerm.connectivity-sub
+  provider             = azurerm.connectivity-sub
   name                 = "GatewaySubnet"
   resource_group_name  = local.connect-rgname
   virtual_network_name = azurerm_virtual_network.connectivity-vnet.name
