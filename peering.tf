@@ -1,5 +1,6 @@
 # VNet peering between hub and corp landing zone
 resource "azurerm_virtual_network_peering" "hub-to-corp-peering" {
+  provider            = azurerm.connectivity-sub
   name                      = "peering-hub2corp"
   resource_group_name       = azurerm_resource_group.connectivity-rg.name
   virtual_network_name      = azurerm_virtual_network.connectivity-vnet.name
@@ -12,6 +13,7 @@ resource "azurerm_virtual_network_peering" "hub-to-corp-peering" {
 }
 
 resource "azurerm_virtual_network_peering" "corp-to-hub-peering" {
+  provider            = azurerm.connectivity-sub
   name                      = "peering-corp2hub"
   resource_group_name       = azurerm_resource_group.corp-rg.name
   virtual_network_name      = azurerm_virtual_network.corp-vnet.name
