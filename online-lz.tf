@@ -1,5 +1,5 @@
 # Doesn't require connectivity to on-premise
-# Can create a web app etc to hold internet-based company applications or websites
+# Use this online landing zone to implement your company's internet-facing applications
 
 locals {
   online-rg                      = "company-website-network-rg"
@@ -24,17 +24,7 @@ resource "azurerm_resource_group" "online-network-rg" {
   }
 }
 
-resource "azurerm_network_security_group" "online-network-secgrp" {
-  provider            = azurerm.online-sub
-  name                = "onlineNetworkSecurityGroup"
-  location            = local.online-loc
-  resource_group_name = local.online-rg
-
-  tags = {
-    environment = local.online-tag
-  }
-}
-
+# Virtual Network for the company online based application
 resource "azurerm_virtual_network" "online-application-network" {
   provider            = azurerm.online-sub
   name                = "online-application-network"
