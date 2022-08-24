@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "connectivity-rg" {
   }
 }
 
-# Hub virtual network
+# Hub Virtual Network
 resource "azurerm_virtual_network" "connectivity-vnet" {
   provider            = azurerm.connectivity-sub
   name                = "hub-vnet"
