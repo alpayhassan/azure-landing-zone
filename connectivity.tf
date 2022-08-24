@@ -1,8 +1,6 @@
 locals {
   connect-location = "uksouth"
   connect-rgname   = "connectivity-rg"
-  connect-tag      = "Connectivity"
-  ipsec-key        = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
 }
 
 resource "azurerm_resource_group" "connectivity-rg" {
@@ -11,7 +9,7 @@ resource "azurerm_resource_group" "connectivity-rg" {
   location = local.connect-location
 
   tags = {
-    environment = local.connect-tag
+    environment = "Connectivity"
   }
 }
 
@@ -24,7 +22,7 @@ resource "azurerm_virtual_network" "connectivity-vnet" {
   address_space       = ["10.0.0.0/24"]
 
   tags = {
-    environment = local.connect-tag
+    environment = "Connectivity"
   }
 }
 
@@ -62,7 +60,7 @@ resource "azurerm_public_ip" "gateway-pip" {
   allocation_method   = "Dynamic"
 
   tags = {
-    environment = local.connect-tag
+    environment = "Connectivity"
   }
 }
 
@@ -75,20 +73,9 @@ resource "azurerm_public_ip" "firewall-pip" {
   sku                 = "Standard"
 
   tags = {
-    environment = local.connect-tag
+    environment = "Connectivity"
   }
 }
-
-# Local Network Gateway
-resource "azurerm_local_network_gateway" "onpremise-gateway" {
-  provider            = azurerm.connectivity-sub
-  name                = "onpremise"
-  location            = local.connect-location
-  resource_group_name = local.connect-rgname
-  gateway_address     = "185.169.225.59"
-  address_space       = ["10.1.1.0/26"]
-}
-
 
 # Virtual Network Gateway
 resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
@@ -113,24 +100,6 @@ resource "azurerm_virtual_network_gateway" "hub-vpn-gateway" {
   depends_on = [azurerm_public_ip.gateway-pip]
 
   tags = {
-    environment = local.connect-tag
-  }
-}
-
-# Gateway Connection to on-premise network
-resource "azurerm_virtual_network_gateway_connection" "onpremise-gateway-connection" {
-  provider            = azurerm.connectivity-sub
-  name                = "office"
-  location            = local.connect-location
-  resource_group_name = local.connect-rgname
-
-  type                       = "IPsec"
-  virtual_network_gateway_id = azurerm_virtual_network_gateway.hub-vpn-gateway.id
-  local_network_gateway_id   = azurerm_local_network_gateway.onpremise-gateway.id
-
-  shared_key = local.ipsec-key
-
-  tags = {
-    environment = local.connect-tag
+    environment = "Connectivity"
   }
 }
