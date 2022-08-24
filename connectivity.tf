@@ -16,7 +16,7 @@ resource "azurerm_resource_group" "connectivity-rg" {
 # Hub virtual network
 resource "azurerm_virtual_network" "connectivity-vnet" {
   provider            = azurerm.connectivity-sub
-  name                = "connectivity-vnet"
+  name                = "hub-vnet"
   location            = local.connect-location
   resource_group_name = local.connect-rgname
   address_space       = ["10.0.0.0/24"]
