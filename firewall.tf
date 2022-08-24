@@ -1,6 +1,5 @@
 locals {
   fw-location = "uksouth"
-  fw-tag      = "Connectivity"
 }
 
 # Firewall policy
@@ -12,7 +11,7 @@ resource "azurerm_firewall_policy" "firewall-policy" {
   sku                 = "Premium"
 
   tags = {
-    environment = local.fw-tag
+    environment = "Connectivity"
   }
 }
 
@@ -33,7 +32,7 @@ resource "azurerm_firewall" "firewall" {
   }
 
   tags = {
-    environment = local.fw-tag
+    environment = "Connectivity"
   }
 }
 

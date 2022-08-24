@@ -1,10 +1,9 @@
 # Doesn't require connectivity to on-premise
-# Use this online landing zone to implement your company's internet-facing applications
+# This online landing zone is just a mock one but should be used to implement your company's internet-facing applications
 
 locals {
   online-rg                      = "company-website-network-rg"
   online-loc                     = "uksouth"
-  online-tag                     = "Online"
   backend_address_pool_name      = "${azurerm_virtual_network.online-application-network.name}-beap"
   frontend_port_name             = "${azurerm_virtual_network.online-application-network.name}-feport"
   frontend_ip_configuration_name = "${azurerm_virtual_network.online-application-network.name}-feip"
@@ -20,7 +19,7 @@ resource "azurerm_resource_group" "online-network-rg" {
   location = local.online-loc
 
   tags = {
-    environment = local.online-tag
+    environment = "Online"
   }
 }
 
@@ -33,7 +32,7 @@ resource "azurerm_virtual_network" "online-application-network" {
   address_space       = ["10.254.0.0/16"]
 
   tags = {
-    environment = local.online-tag
+    environment = "Online"
   }
 }
 
@@ -61,7 +60,7 @@ resource "azurerm_public_ip" "online-application-pip" {
   allocation_method   = "Static"
 
   tags = {
-    environment = local.online-tag
+    environment = "Online"
   }
 }
 
@@ -123,7 +122,7 @@ resource "azurerm_application_gateway" "online-application-gateway" {
   }
 
   tags = {
-    environment = local.online-tag
+    environment = "Online"
   }
 }
 
@@ -135,7 +134,7 @@ resource "azurerm_resource_group" "online-app-rg" {
   location = local.online-loc
 
   tags = {
-    environment = local.online-tag
+    environment = "Online"
   }
 }
 
@@ -149,7 +148,7 @@ resource "azurerm_service_plan" "online-app-service-plan" {
   os_type             = "Windows"
 
   tags = {
-    environment = local.online-tag
+    environment = "Online"
   }
 }
 
@@ -164,6 +163,6 @@ resource "azurerm_windows_web_app" "company-online-application1" {
   site_config {}
 
   tags = {
-    environment = local.online-tag
+    environment = "Online"
   }
 }

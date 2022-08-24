@@ -1,6 +1,5 @@
 locals {
   location    = "uksouth"
-  corp-tag    = "Corp"
   corp-rgname = "on-premise-application-rg"
 }
 
@@ -10,7 +9,7 @@ resource "azurerm_resource_group" "corp-rg" {
   location = local.location
 
   tags = {
-    environment = local.corp-tag
+    environment = "Corp"
   }
 }
 
@@ -23,7 +22,7 @@ resource "azurerm_virtual_network" "corp-vnet" {
   address_space       = ["10.1.0.0/24"]
 
   tags = {
-    environment = local.corp-tag
+    environment = "Corp"
   }
 }
 

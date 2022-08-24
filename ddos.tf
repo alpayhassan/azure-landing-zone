@@ -1,7 +1,7 @@
-# This is a very high cost service so I have commented it out to avoid deploying
-
 # Company DDoS protection plan to be associated with virtual networks
-/*resource "azurerm_resource_group" "mycompany-ddos" {
+# This is a very high cost service
+
+resource "azurerm_resource_group" "mycompany-ddos" {
   provider = azurerm.connectivity-sub
   name     = "ddos-protection-rg"
   location = "uksouth"
@@ -21,4 +21,3 @@ resource "azurerm_network_ddos_protection_plan" "ddos-pp" {
     environment = "Connectivity"
   }
 }
-*/
