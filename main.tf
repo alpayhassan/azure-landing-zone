@@ -327,3 +327,4 @@ resource "azurerm_subscription_policy_assignment" "activitylogs_sent_to_loganaly
   policy_definition_id = azurerm_policy_definition.activitylogs_sent_to_loganalyticsworkspace.id
   subscription_id      = data.azurerm_subscription.mgmt-sub.subscription_id
 }
+# 
