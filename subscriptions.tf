@@ -1,4 +1,4 @@
-# Using data to access existing subscriptions
+# I have created these subscriptions prior to this project, so I am using data to fetch them
 
 # Connectivity Subscription
 data "azurerm_subscription" "connectivity-sub" {
