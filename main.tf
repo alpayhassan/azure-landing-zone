@@ -326,5 +326,6 @@ resource "azurerm_subscription_policy_assignment" "activitylogs_sent_to_loganaly
   name                 = "activitylogs-sent-to-loganalyticsworkspace"
   policy_definition_id = azurerm_policy_definition.activitylogs_sent_to_loganalyticsworkspace.id
   subscription_id      = data.azurerm_subscription.mgmt-sub.subscription_id
+  description          = "Deploys the diagnostic settings for Azure Activity to stream subscriptions audit logs to a Log Analytics workspace to monitor subscription-level events"
+  display_name         = "Configure Azure Activity logs to stream to specified Log Analytics workspace"
 }
-# 
