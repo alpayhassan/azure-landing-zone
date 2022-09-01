@@ -2,6 +2,8 @@ This is a mock Azure Landing Zone I have configured using Terraform for a compan
 Landing Zones help organisations make governance, strategy and security decisions when adopting cloud frameworks.
 The subscriptions within the landing zone are mostly empty, consisting of foundational Azure services / resources.
 
+
+We can imagine that this company would have an a corporate-facing custom-built application and an internet-facing application.
 This framework consists of 4 subscriptions:
 
 Connectivity:
