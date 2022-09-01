@@ -1,4 +1,4 @@
-This is an Azure Landing Zone I have configured using Terraform for a mock company that is looking to migrate their infrastructure to Azure.
+This is a mock Azure Landing Zone I have configured using Terraform for a company that is looking to migrate their infrastructure to Azure.
 Landing Zones help organisations make governance, strategy and security decisions when adopting cloud frameworks.
 The subscriptions within the landing zone are mostly empty, consisting of foundational Azure services / resources.
 
