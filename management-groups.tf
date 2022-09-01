@@ -11,7 +11,7 @@ resource "azurerm_management_group" "platform-grp" {
 }
 
 # Platform child groups:
-# Mgmt management group
+# Connectivity management group
 resource "azurerm_management_group" "connectivity-grp" {
   display_name               = "Connectivity"
   parent_management_group_id = azurerm_management_group.platform-grp.id
@@ -21,7 +21,7 @@ resource "azurerm_management_group" "connectivity-grp" {
   ]
 }
 
-# Connectivity management group
+# Mgmt management group
 resource "azurerm_management_group" "mgmt-grp" {
   display_name               = "Management Group"
   parent_management_group_id = azurerm_management_group.platform-grp.id
